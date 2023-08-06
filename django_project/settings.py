@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-c+1^e3h3kic-r)^z6atipvch-k^h@=)*u7%j!w0r%@s7!8$8hw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 
 
 # Application definition
@@ -36,18 +36,26 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # whitenoise
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # allauth
     "allauth",
     "allauth.account",
+    # rest
+    "rest_framework",
     # local
     "books.apps.BooksConfig",
     "accounts.apps.AccountsConfig",
+    "apis.apps.ApisConfig",
+
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # whitenoise
+    "whitenoise.middleware.WhiteNoiseMiddleware"
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -124,7 +132,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
